@@ -10,30 +10,24 @@
 
 <div class="background">
     <div class="container">
+        <!-- Header with Flag and Language -->
         <div class="header">
             <div class="language">
                 <img src="language-icon.png" alt="שפה" width="30"> שפה:
             </div>
-            <h1>אישור יציאה</h1>
         </div>
 
+        <!-- Confirmation Box -->
         <div class="confirmation-box">
             <div class="confirmation-text">
-                <p>אושרה בקשת: <span id="userName"></span></p>
-                <p>לשחרורך החד פעמי מבית הספר</p>
-                <p>תאריך: <span id="currentDate"></span></p>
-                <p>שעת יציאה: <span id="startTime"></span></p>
-                <p>שעת חזרה: <span id="endTime"></span></p>
+                <p>אישור פג תוקף, תוקף האישור:</p>
+                <p><span id="currentDate"></span>, <span id="startTime"></span> - <span id="endTime"></span></p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Prompt for user's name
-    const userName = prompt("מה השם שלך?");
-    document.getElementById("userName").textContent = userName;
-
     // Get the current date and time
     const today = new Date();
     document.getElementById("currentDate").textContent = today.toLocaleDateString("he-IL");
