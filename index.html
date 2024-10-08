@@ -15,9 +15,6 @@
         <div class="form-container active" id="formContainer">
             <h2>הזן את פרטי האישור</h2>
             <form id="dataForm">
-                <label for="date">תאריך:</label>
-                <input type="date" id="date" name="date" required><br><br>
-                
                 <label for="startTime">שעת התחלה:</label>
                 <select id="startTime" name="startTime" required></select><br><br>
                 
@@ -45,11 +42,8 @@
             <div class="confirmation-text">
                 <p>תאריך: <span id="dateDisplay"></span></p>
                 <p>שעה: <span id="startTimeDisplay"></span> - <span id="endTimeDisplay"></span></p>
-                <p>שם התלמיד: יונתן יואב פרייז</p>
-                <p>סיבה: ביטול שיעור</p>
-                <p>כיתה: <span id="classDisplay"></span></p>
-                <p>מחזוריות: חד פעמית</p>
-                <p>סטטוס: אושר</p>
+                <p>שם התלמיד: יונתן יואב פרייז | סיבה: ביטול שיעור | כיתה: <span id="classDisplay"></span></p>
+                <p>מחזוריות: חד פעמית | סטטוס: אושר</p>
             </div>
             <div class="confirmation-tick">
                 <img src="green-tick.png" alt="אושר">
@@ -61,6 +55,11 @@
 </div>
 
 <script>
+    // Automatically get today's date in the format DD/MM/YYYY
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('he-IL');
+    document.getElementById("dateDisplay").textContent = formattedDate;
+
     // Populate the start and end time dropdowns
     const startTimeSelect = document.getElementById("startTime");
     const endTimeSelect = document.getElementById("endTime");
@@ -95,13 +94,11 @@
     // Function to handle form submission
     function submitForm() {
         // Get values from the form
-        const date = document.getElementById("date").value;
         const startTime = document.getElementById("startTime").value;
         const endTime = document.getElementById("endTime").value;
         const classSelected = document.getElementById("class").value;
 
         // Populate confirmation section
-        document.getElementById("dateDisplay").textContent = date;
         document.getElementById("startTimeDisplay").textContent = startTime.padStart(2, '0') + ":00";
         document.getElementById("endTimeDisplay").textContent = endTime.padStart(2, '0') + ":00";
         document.getElementById("classDisplay").textContent = classSelected;
