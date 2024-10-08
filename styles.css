@@ -35,39 +35,26 @@ body {
     color: white;
 }
 
-.language {
+.language, .home-icon {
     font-size: 16px;
     display: flex;
     align-items: center;
     color: white; /* White text color */
 }
 
-.language img {
+.language img, .home-icon img {
     margin-left: 5px; /* Adjust spacing */
 }
 
-.home-icon img {
-    margin-left: 5px; /* Adjust spacing for the home icon */
-}
-
-.confirmation-box {
-    background-color: #f8d7da;
+.info-box, .confirmation {
     margin: 20px 0;
     padding: 20px;
     border-radius: 10px;
-    border: 1px solid #f5c6cb;
-    color: #721c24;
+    background-color: #f8f9fa;
 }
 
-.confirmation-text {
-    font-size: 18px;
+.info-box p, .confirmation p {
+    font-size: 16px;
     line-height: 1.8;
-}
-
-.confirmation-text p {
     margin: 10px 0;
-}
-
-p span {
-    font-weight: bold;
 }
