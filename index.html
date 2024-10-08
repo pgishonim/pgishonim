@@ -35,9 +35,8 @@
     const today = new Date();
     document.getElementById("currentDate").textContent = today.toLocaleDateString("he-IL");
 
-    // Get current hour and minutes
+    // Get current hour
     const currentHour = today.getHours();
-    const currentMinutes = today.getMinutes();
 
     // Calculate the start and end time dynamically based on the current hour
     let startTime = currentHour.toString().padStart(2, '0') + ":00";
