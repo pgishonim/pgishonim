@@ -20,31 +20,72 @@
             </div>
         </div>
 
-        <!-- Confirmation Box -->
-        <div class="confirmation-box">
-            <div class="confirmation-text">
-                <p>אישור פג תוקף, תוקף האישור:</p>
-                <p><span id="currentDate"></span>, <span id="startTime"></span> - <span id="endTime"></span></p>
-            </div>
+        <!-- Information Fields -->
+        <div class="info-box">
+            <p>תאריך: <span id="currentDate"></span></p>
+            <p>שעה: 
+                <select id="startHour"></select> - <select id="endHour"></select>
+            </p>
+            <p>שם התלמיד: יונתן יואב פרייז</p>
+            <p>סיבה: ביטול שיעור</p>
+            <p>כיתה: 
+                <select id="classSelect">
+                    <option>יב1</option>
+                    <option>יב2</option>
+                    <option>יב3</option>
+                    <option>יב4</option>
+                    <option>יב5</option>
+                    <option>יב6</option>
+                    <option>יב7</option>
+                    <option>יב8</option>
+                </select>
+            </p>
+            <p>מחזוריות: חד פעמית</p>
+            <p>סטטוס: אושר</p>
+        </div>
+
+        <div class="confirmation">
+            <img src="green-tick.png" alt="אושר" width="100">
+            <p>אושר על ידי: מנהל מערכת</p>
         </div>
     </div>
 </div>
 
 <script>
-    // Get the current date and time
+    // Get the current date and set it
     const today = new Date();
     document.getElementById("currentDate").textContent = today.toLocaleDateString("he-IL");
 
-    // Get current hour
-    const currentHour = today.getHours();
+    // Populate the start and end hour dropdowns
+    const startHourSelect = document.getElementById("startHour");
+    const endHourSelect = document.getElementById("endHour");
 
-    // Calculate the start and end time dynamically based on the current hour
-    let startTime = currentHour.toString().padStart(2, '0') + ":00";
-    let endTime = ((currentHour + 1) % 24).toString().padStart(2, '0') + ":00";
+    // Populate options for start time (08:00 to 16:00)
+    for (let i = 8; i <= 16; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i.toString().padStart(2, '0') + ":00";
+        startHourSelect.appendChild(option);
+    }
 
-    // Display the calculated time range
-    document.getElementById("startTime").textContent = startTime;
-    document.getElementById("endTime").textContent = endTime;
+    // Function to populate end hour options based on start hour
+    function populateEndHours(startHour) {
+        endHourSelect.innerHTML = ''; // Clear previous options
+        for (let i = parseInt(startHour) + 1; i <= 17; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = i.toString().padStart(2, '0') + ":00";
+            endHourSelect.appendChild(option);
+        }
+    }
+
+    // Event listener for start hour change
+    startHourSelect.addEventListener("change", function() {
+        populateEndHours(this.value);
+    });
+
+    // Initialize with default values
+    populateEndHours(8);
 </script>
 
 </body>
