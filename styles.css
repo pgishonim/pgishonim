@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #edf2f7;
     margin: 0;
     padding: 0;
     direction: rtl; /* Right-to-left layout for Hebrew */
+    background-color: #edf2f7; /* Light background */
 }
 
 .background {
-    background-color: #edf2f7; /* Light background */
+    background: linear-gradient(to bottom, #edf2f7 50%, #1d4599 50%); /* Blue and white design */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -20,27 +20,34 @@ body {
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    border: 2px solid #d3d3d3; /* Soft border */
+    border: 3px solid #1d4599; /* Blue border */
     padding: 20px;
 }
 
 .header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    background-color: #f0f4fa;
+    background-color: #1d4599; /* Blue background for header */
     padding: 10px;
-    border-bottom: 1px solid #d3d3d3;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
 }
 
 .language {
     font-size: 16px;
     display: flex;
     align-items: center;
+    color: white; /* White text color */
 }
 
 .language img {
     margin-left: 5px; /* Adjust spacing */
+}
+
+.home-icon img {
+    margin-left: 5px; /* Adjust spacing for the home icon */
 }
 
 .confirmation-box {
