@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4fa;
+    background-color: #edf2f7;
     margin: 0;
     padding: 0;
     direction: rtl; /* Right-to-left layout for Hebrew */
 }
 
 .background {
-    background-color: #edf2f7; /* Light background similar to the image */
+    background-color: #edf2f7; /* Light background */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -20,40 +20,47 @@ body {
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    border: 2px solid #d3d3d3; /* Soft border like the image */
+    border: 2px solid #d3d3d3; /* Soft border */
     padding: 20px;
-    box-shadow: none; /* Remove shadow for simplicity */
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding-bottom: 10px;
+    background-color: #f0f4fa;
+    padding: 10px;
+    border-bottom: 1px solid #d3d3d3;
 }
 
 .language {
     font-size: 16px;
     display: flex;
     align-items: center;
-    justify-content: center;
+}
+
+.language img {
+    margin-left: 5px; /* Adjust spacing */
 }
 
 .confirmation-box {
-    background-color: #f8d7da; /* You can adjust this color based on the image */
+    background-color: #f8d7da;
+    margin: 20px 0;
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #f5c6cb;
     color: #721c24;
-    margin-top: 20px;
+}
+
+.confirmation-text {
+    font-size: 18px;
+    line-height: 1.8;
 }
 
 .confirmation-text p {
     margin: 10px 0;
-    font-size: 18px;
-    font-weight: bold;
 }
 
-.confirmation-text strong {
-    font-weight: normal;
+p span {
+    font-weight: bold;
 }
