@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     direction: rtl; /* Right-to-left layout for Hebrew */
-    background-color: #edf2f7; /* Light background */
+    background-color: #1d4599; /* Blue background */
 }
 
 .background {
@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #edf2f7;
+    background-color: #1d4599; /* Blue background */
 }
 
 .container {
@@ -32,14 +32,12 @@ body {
     display: block;
 }
 
-.form-container h2 {
-    margin-bottom: 20px;
-}
-
 .confirmation-text {
     font-size: 18px;
     line-height: 1.8;
     margin-bottom: 20px;
+    border-bottom: 2px solid #1d4599;
+    padding-bottom: 10px;
 }
 
 .confirmation-tick {
