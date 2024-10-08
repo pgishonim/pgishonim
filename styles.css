@@ -7,11 +7,11 @@ body {
 }
 
 .background {
-    background: linear-gradient(to bottom, #edf2f7 50%, #1d4599 50%); /* Blue and white design */
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: #edf2f7;
 }
 
 .container {
@@ -19,42 +19,61 @@ body {
     max-width: 400px;
     background-color: white;
     border-radius: 10px;
-    text-align: center;
     border: 3px solid #1d4599; /* Blue border */
     padding: 20px;
+    text-align: center;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1d4599; /* Blue background for header */
-    padding: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    color: white;
+.form-container, .confirmation-container {
+    display: none;
 }
 
-.language, .home-icon {
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    color: white; /* White text color */
+.form-container.active, .confirmation-container.active {
+    display: block;
 }
 
-.language img, .home-icon img {
-    margin-left: 5px; /* Adjust spacing */
+.form-container h2 {
+    margin-bottom: 20px;
 }
 
-.info-box, .confirmation {
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-}
-
-.info-box p, .confirmation p {
-    font-size: 16px;
+.confirmation-text {
+    font-size: 18px;
     line-height: 1.8;
-    margin: 10px 0;
+    margin-bottom: 20px;
+}
+
+.confirmation-tick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.confirmation-tick img {
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+button {
+    background-color: #1d4599;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #16377a;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+select, input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
 }
