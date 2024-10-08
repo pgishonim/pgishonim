@@ -3,151 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אישור יציאה</title>
-    <style>
-        /* Basic body styling */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f4ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Container styling */
-        #container {
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            background: linear-gradient(to top right, #ffffff 60%, #e7eaf0 100%);
-        }
-
-        /* Title */
-        #title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        /* Message box styling */
-        #messageBox {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            padding: 15px;
-            border: 1px solid #bee5eb;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            position: relative;
-        }
-
-        /* Input field styling */
-        #nameInput {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: calc(100% - 22px);
-        }
-
-        /* Button styling */
-        #submitButton {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* Time message */
-        #timeRange {
-            padding-left: 10px;
-        }
-
-        /* Home icon styling */
-        .homeIcon {
-            font-size: 1.5em;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: #333;
-        }
-
-        /* Language selection */
-        .language {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.1em;
-            color: #333;
-        }
-    </style>
+    <title>אישור יציאה מבית הספר</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div id="container">
-    <div id="title">הדפסת אישור יציאה</div>
+<div class="container">
+    <div class="header">
+        <div class="language">
+            <img src="language-icon.png" alt="שפה" width="30"> שפה:
+        </div>
+    </div>
 
-    <!-- Input field for user's name -->
-    <input type="text" id="nameInput" placeholder="הכנס שם מלא">
-    
-    <!-- Button to submit the name -->
-    <button id="submitButton">שלח</button>
-
-    <!-- Box to display the message -->
-    <div id="messageBox" style="display:none;">
-        <p id="timeRange">המידע יופיע כאן...</p>
+    <div class="confirmation-box">
+        <div class="confirmation-text">
+            <p>אושרה בקשת: <span id="userName"></span></p>
+            <p>לשחרורך החד פעמי מבית הספר</p>
+            <p>תאריך: <span id="currentDate"></span></p>
+            <p>שעת יציאה: <span id="startTime"></span></p>
+            <p>שעת חזרה: <span id="endTime"></span></p>
+        </div>
     </div>
 </div>
 
 <script>
-    function getCurrentTimeRange() {
-        const now = new Date();
-        const currentHour = now.getHours();
-        const startHour = currentHour >= 8 ? currentHour : 8;  // Start at current hour, or default to 8
-        const endHour = startHour + 1;
+    // Prompt for user's name
+    const userName = prompt("מה השם שלך?");
+    document.getElementById("userName").textContent = userName;
 
-        const formattedStart = `${startHour.toString().padStart(2, '0')}:00`;
-        const formattedEnd = `${endHour.toString().padStart(2, '0')}:00`;
+    // Get the current date
+    const today = new Date();
+    document.getElementById("currentDate").textContent = today.toLocaleDateString("he-IL");
 
-        const currentDate = now.toLocaleDateString('he-IL');
+    // Time ranges and dynamic handling based on current time
+    const currentHour = today.getHours();
+    let startTime = "";
+    let endTime = "";
 
-        return { formattedStart, formattedEnd, currentDate };
+    // Define the time ranges dynamically
+    if (currentHour >= 8 && currentHour < 9) {
+        startTime = "08:00";
+        endTime = "09:00";
+    } else if (currentHour >= 9 && currentHour < 10) {
+        startTime = "09:00";
+        endTime = "10:00";
+    } else if (currentHour >= 10 && currentHour < 11) {
+        startTime = "10:00";
+        endTime = "11:00";
+    } else if (currentHour >= 11 && currentHour < 12) {
+        startTime = "11:00";
+        endTime = "12:00";
+    } else if (currentHour >= 12 && currentHour < 13) {
+        startTime = "12:00";
+        endTime = "13:00";
+    } else if (currentHour >= 13 && currentHour < 14) {
+        startTime = "13:00";
+        endTime = "14:00";
+    } else if (currentHour >= 14 && currentHour < 15) {
+        startTime = "14:00";
+        endTime = "15:00";
+    } else if (currentHour >= 15 && currentHour < 16) {
+        startTime = "15:00";
+        endTime = "16:00";
+    } else {
+        startTime = "לא בשעות העבודה";  // If outside working hours
+        endTime = "";
     }
 
-    document.getElementById('submitButton').addEventListener('click', function() {
-        const userName = document.getElementById('nameInput').value.trim();
-
-        if (userName === "") {
-            alert("אנא הכנס שם מלא.");
-            return;
-        }
-
-        // Get current time range and date
-        const { formattedStart, formattedEnd, currentDate } = getCurrentTimeRange();
-
-        // Update the message with the user's name and the time range
-        document.getElementById('timeRange').textContent = `
-            אושרה בקשת: ${userName}
-            לשחרורך החד פעמי מבית הספר.
-            
-            תאריך: ${currentDate}
-            שעת יציאה: ${formattedStart}
-            שעת חזרה: ${formattedEnd}
-        `;
-
-        // Show the message box
-        document.getElementById('messageBox').style.display = 'block';
-    });
+    // Display the calculated time range
+    document.getElementById("startTime").textContent = startTime;
+    document.getElementById("endTime").textContent = endTime;
 </script>
 
 </body>
