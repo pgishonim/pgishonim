@@ -1,118 +1,177 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>אישור יציאה</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            direction: rtl; /* RTL for Hebrew */
+            background-image: url('pgishonim_back.png'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: black;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding-top: 20px;
+            position: relative; /* To position the confirmation text */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .language-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: right; /* Align title to the right */
+            flex-grow: 1;
+            margin-right: 20px; /* Space between icon and title */
+        }
+
+        .data-section {
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .data-section p {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .confirmation {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 40px; /* Space below green tick */
+            color: black;
+        }
+
+        .confirmation p {
+            font-weight: bold;
+        }
+
+        .green-check {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; /* Adjust the size if necessary */
+            height: 100px; /* Adjust the size if necessary */
+            background-image: url('green_tick.png'); /* Ensure you have the green tick image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Style for input fields */
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-
-<div class="background">
     <div class="container">
+        <div class="header">
+            <span>שפה:</span>
+            <img src="language-icon.png" alt="Language Icon" class="language-icon">
+        </div>
+        <div class="title">הדפסת אישור יציאה</div>
 
-        <!-- Input Form Section -->
-        <div class="form-container active" id="formContainer">
-            <h2>הזן את פרטי האישור</h2>
-            <form id="dataForm">
-                <label for="studentName">שם התלמיד:</label>
-                <input type="text" id="studentName" name="studentName" required><br><br>
-
-                <label for="startTime">שעת התחלה:</label>
-                <select id="startTime" name="startTime" required></select><br><br>
-                
-                <label for="endTime">שעת סיום:</label>
-                <select id="endTime" name="endTime" required></select><br><br>
-
-                <label for="class">כיתה:</label>
-                <select id="class" name="class" required>
-                    <option value="יב1">יב1</option>
-                    <option value="יב2">יב2</option>
-                    <option value="יב3">יב3</option>
-                    <option value="יב4">יב4</option>
-                    <option value="יב5">יב5</option>
-                    <option value="יב6">יב6</option>
-                    <option value="יב7">יב7</option>
-                    <option value="יב8">יב8</option>
-                </select><br><br>
-
-                <button type="button" onclick="submitForm()">אשר</button>
-            </form>
+        <!-- User Input Section -->
+        <div class="user-input">
+            <input type="text" id="classInput" placeholder="כיתה">
+            <input type="text" id="studentNameInput" placeholder="שם התלמיד">
+            <input type="text" id="reasonInput" placeholder="סיבה">
+            <input type="text" id="frequencyInput" placeholder="מחזוריות">
+            <label for="startTimeInput">שעה התחלה:</label>
+            <input type="time" id="startTimeInput" value="08:00">
+            <label for="endTimeInput">שעה סיום:</label>
+            <input type="time" id="endTimeInput" value="09:00">
+            <button id="submitBtn">אשר</button>
         </div>
 
-        <!-- Confirmation Section -->
-        <div class="confirmation-container" id="confirmationContainer">
-            <div class="confirmation-text">
-                <p>תאריך: <span id="dateDisplay"></span></p>
-                <p>שעה: <span id="startTimeDisplay"></span> - <span id="endTimeDisplay"></span></p>
-                <p>שם התלמיד: <span id="studentNameDisplay"></span> | סיבה: ביטול שיעור | כיתה: <span id="classDisplay"></span></p>
-                <p>מחזוריות: חד פעמית | סטטוס: אושר</p>
+        <div class="data-section">
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>תאריך:</strong> <span id="date"></span></p>
+                <p><strong>שעה:</strong> <span id="time"></span></p>
             </div>
-            <div class="confirmation-tick">
-                <img src="green-tick.png" alt="אושר">
-                <p>אושר על ידי: מנהל מערכת</p>
-            </div>
+            <p><strong>כיתה:</strong> <span id="class"></span></p>
+            <p><strong>סטטוס:</strong> <span id="status"></span></p>
+            <p><strong>שם התלמיד:</strong> <span id="studentName"></span></p>
+            <p><strong>סיבה:</strong> <span id="reason"></span></p>
+            <p><strong>מחזוריות:</strong> <span id="frequency"></span></p>
         </div>
 
+        <div class="confirmation">
+            <p>אושר על ידי: <span id="approvedBy"></span></p>
+        </div>
+
+        <div class="green-check"></div> <!-- Green check overlay -->
     </div>
-</div>
 
-<script>
-    // Automatically get today's date in the format DD/MM/YYYY
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString('he-IL');
-    document.getElementById("dateDisplay").textContent = formattedDate;
+    <script>
+        // Set static date
+        document.getElementById("date").innerText = "01/10/2024";
 
-    // Populate the start and end time dropdowns
-    const startTimeSelect = document.getElementById("startTime");
-    const endTimeSelect = document.getElementById("endTime");
+        // Submit button event listener
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            // Get values from user input
+            const classInput = document.getElementById("classInput").value;
+            const studentNameInput = document.getElementById("studentNameInput").value;
+            const reasonInput = document.getElementById("reasonInput").value;
+            const frequencyInput = document.getElementById("frequencyInput").value;
+            const startTimeInput = document.getElementById("startTimeInput").value;
+            const endTimeInput = document.getElementById("endTimeInput").value;
 
-    // Populate options for start time (08:00 to 16:00)
-    for (let i = 8; i <= 16; i++) {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = i.toString().padStart(2, '0') + ":00";
-        startTimeSelect.appendChild(option);
-    }
+            // Update displayed data
+            document.getElementById("class").innerText = classInput;
+            document.getElementById("studentName").innerText = studentNameInput;
+            document.getElementById("reason").innerText = reasonInput;
+            document.getElementById("frequency").innerText = frequencyInput;
+            document.getElementById("time").innerText = `${startTimeInput} - ${endTimeInput}`;
 
-    // Function to populate end hour options based on start hour
-    function populateEndTimes(startHour) {
-        endTimeSelect.innerHTML = ''; // Clear previous options
-        for (let i = parseInt(startHour) + 1; i <= 17; i++) {
-            const option = document.createElement("option");
-            option.value = i;
-            option.textContent = i.toString().padStart(2, '0') + ":00";
-            endTimeSelect.appendChild(option);
-        }
-    }
-
-    // Event listener for start time change
-    startTimeSelect.addEventListener("change", function() {
-        populateEndTimes(this.value);
-    });
-
-    // Initialize end times with the default start time
-    populateEndTimes(8);
-
-    // Function to handle form submission
-    function submitForm() {
-        // Get values from the form
-        const studentName = document.getElementById("studentName").value;
-        const startTime = document.getElementById("startTime").value;
-        const endTime = document.getElementById("endTime").value;
-        const classSelected = document.getElementById("class").value;
-
-        // Populate confirmation section
-        document.getElementById("studentNameDisplay").textContent = studentName;
-        document.getElementById("startTimeDisplay").textContent = startTime.padStart(2, '0') + ":00";
-        document.getElementById("endTimeDisplay").textContent = endTime.padStart(2, '0') + ":00";
-        document.getElementById("classDisplay").textContent = classSelected;
-
-        // Show the confirmation section and hide the form
-        document.getElementById("formContainer").classList.remove("active");
-        document.getElementById("confirmationContainer").classList.add("active");
-    }
-</script>
-
+            // Set a static status and approval
+            document.getElementById("status").innerText = "מאושר"; // Status input
+            document.getElementById("approvedBy").innerText = "מנהל מערכת"; // Approval input
+        });
+    </script>
 </body>
 </html>
