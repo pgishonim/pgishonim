@@ -2,53 +2,68 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    direction: rtl; /* Right-to-left layout for Hebrew */
+    direction: rtl; /* For Hebrew layout */
 }
 
 .background {
-    background-image: url('pgishonim_back.png'); /* Set the background image */
+    background-image: url('pgishonim.jpg'); /* Set the provided background image */
     background-size: cover;
     background-position: center;
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    padding: 20px;
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for the form */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-h2 {
+    width: 100%;
+    max-width: 600px; /* Adjust based on preferred width */
     text-align: center;
+    color: black;
+    background: none; /* Transparent, so it overlays directly on the background */
 }
 
-.form-container.active {
-    display: block;
+.header {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background: none; /* No background to overlay over image */
 }
 
-.form-container {
-    display: none;
+.data-section {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background: none; /* Transparent */
 }
 
-.confirmation-container {
-    display: none;
+.data-section p {
+    margin: 5px 0;
+    background: none; /* Transparent */
 }
 
-.confirmation-container.active {
-    display: block;
+.data-section .left {
+    text-align: left;
+}
+
+.data-section .right {
     text-align: right;
 }
 
-.confirmation-text p {
-    margin: 10px 0;
-    font-size: 18px;
+.confirmation {
+    position: relative;
+    font-size: 16px;
+    margin-top: 30px;
+    color: black;
+    background: none; /* Transparent */
 }
 
-.confirmation-tick {
+.confirmation p {
+    margin: 20px 0;
     text-align: center;
-    display: none; /* Hide the green tick section */
+    font-weight: bold;
+    background: none; /* Transparent */
 }
