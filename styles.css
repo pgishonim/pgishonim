@@ -3,107 +3,57 @@ body {
     margin: 0;
     padding: 0;
     direction: rtl; /* Right-to-left layout for Hebrew */
-    background-color: #f5f5f5; /* Light grey background */
-}
-
-.background {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #f0f4f8; /* Light grayish background */
 }
 
 .container {
-    width: 100%;
-    max-width: 400px;
-    background-color: white;
-    border-radius: 10px;
-    border: 3px solid #1d4599; /* Blue border */
-    padding: 0px;
+    width: 90%;
+    max-width: 350px; /* Slightly reduced width for more compact look */
+    margin: 40px auto; /* Centered layout */
+    background-color: #fff;
+    border: 3px solid #1d4599; /* Dark blue border */
+    border-radius: 15px; /* More rounded corners */
     text-align: center;
+    padding: 25px 15px; /* Increased padding for better spacing */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
 }
 
-.form-container, .confirmation-container {
-    display: none;
-}
-
-.form-container.active, .confirmation-container.active {
-    display: block;
-}
-
-/* Confirmation text area styling */
-.confirmation-text {
-    font-size: 18px;
-    line-height: 2;
+p {
+    margin: 8px 0;
+    font-weight: bold;
+    font-size: 18px; /* Larger font for more prominence */
     color: #333;
-    padding: 15px;
-    border-radius: 10px;
-    border: none;
-    text-align: right;
 }
 
 .confirmation-text p {
-    margin: 5px 0;
     padding: 0 15px;
-    font-weight: bold;
-    color: #333;
+    text-align: right; /* Hebrew text alignment */
+    font-size: 17px; /* Slightly larger for clarity */
 }
 
-/* Green tick section styling */
-.confirmation-tick {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 15px;
+.green-checkmark {
+    margin: 20px 0;
 }
 
-.confirmation-tick img {
-    width: 140px;
-    height: auto;
+.green-checkmark img {
+    width: 100px; /* Slightly smaller checkmark */
+    height: 100px;
 }
 
-/* Text styling for confirmation details */
-.confirmation-footer {
-    padding-bottom: 20px;
-}
-
-button {
-    background-color: #1d4599;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #16377a;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-    color: #1d4599;
-}
-
-select, input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #1d4599;
-    border-radius: 5px;
+.footer {
+    margin-top: 15px;
     font-size: 16px;
-}
-
-/* General p tag styling */
-p {
-    margin: 0;
     font-weight: bold;
-    color: #333;
+    color: #1d4599; /* Match the text color */
 }
 
-/* Add a subtle shadow for depth */
-.container {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* Spacing and layout adjustments for time, date, and student details */
+.confirmation-details {
+    padding: 0 20px;
+    text-align: right; /* Proper alignment for Hebrew text */
+}
+
+.confirmation-details p {
+    margin: 8px 0;
+    font-size: 16px; /* Match the text size of the first image */
 }
