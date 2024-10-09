@@ -2,76 +2,95 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    direction: rtl;
+    direction: rtl; /* Right-to-left layout for Hebrew */
 }
 
 .background {
-    background-image: url('pgishonim_back.png');
+    background-image: url('pgishonim_back.png'); /* Set the background image */
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align items to the top of the page */
     height: 100vh;
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 900px; /* Adjust based on your preferred width */
+    position: relative; /* Enable absolute positioning of elements inside */
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.language {
+.header .language {
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 20px; /* Position relative to the container */
+    left: 20px; /* Adjust based on where you want the language selector */
 }
 
-.language img {
+.header .language img {
     margin-left: 10px;
     width: 24px;
     height: 24px;
 }
 
-.title h1 {
-    font-size: 24px;
+.header .title {
     text-align: center;
+    position: absolute;
+    top: 20px;
+    width: 100%; /* Center the title */
+}
+
+.header .title h1 {
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
 }
 
 .data-section {
-    margin-bottom: 20px;
+    position: absolute;
+    top: 100px; /* Adjust this based on your design */
+    right: 20px; /* Align to the right */
+    width: 100%;
+    max-width: 600px;
+    font-size: 18px;
 }
 
-.row {
+.data-section .row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.left, .right {
-    width: 48%;
+.data-section .row p {
+    margin: 0;
+}
+
+.data-section .right {
+    text-align: right;
+}
+
+.data-section .left {
+    text-align: left;
 }
 
 .confirmation {
+    position: absolute;
+    bottom: 20px; /* Positioning for the confirmation text */
+    width: 100%;
     text-align: center;
-    margin-top: 20px;
-}
-
-.confirmation img {
-    width: 80px;
-    height: 80px;
 }
 
 .confirmation p {
-    margin-top: 10px;
+    margin: 0;
     font-size: 16px;
 }
