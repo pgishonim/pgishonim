@@ -11,73 +11,106 @@
 <div class="background">
     <div class="container">
 
-        <!-- Top Section -->
-        <div class="header">
-            <div class="language">
-                <img src="language-icon.png" alt="שפה">
-                <span>שפה:</span>
-            </div>
-            <div class="title">
-                <h1>הפדסת אישור יציאה</h1>
-            </div>
-        </div>
+        <!-- Input Form Section -->
+        <div class="form-container active" id="formContainer">
+            <h2>הזן את פרטי האישור</h2>
+            <form id="dataForm">
+                <label for="studentName">שם התלמיד:</label>
+                <input type="text" id="studentName" name="studentName" required><br><br>
 
-        <!-- Data Section -->
-        <div class="data-section">
-            <div class="row">
-                <div class="left">
-                    <p>תאריך: <span id="dateDisplay"></span></p>
-                </div>
-                <div class="right">
-                    <p>שעה: <span id="startTimeDisplay"></span> - <span id="endTimeDisplay"></span></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="left">
-                    <p>כיתה: <span id="classDisplay"></span></p>
-                </div>
-                <div class="right">
-                    <p>שם התלמיד: <span id="studentNameDisplay"></span></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="left">
-                    <p>סטטוס: אושר</p>
-                </div>
-                <div class="right">
-                    <p>סיבה: ביטול שיעור</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="left">
-                    <p>מחזוריות: חד פעמית</p>
-                </div>
-            </div>
+                <label for="startTime">שעת התחלה:</label>
+                <select id="startTime" name="startTime" required></select><br><br>
+                
+                <label for="endTime">שעת סיום:</label>
+                <select id="endTime" name="endTime" required></select><br><br>
+
+                <label for="class">כיתה:</label>
+                <select id="class" name="class" required>
+                    <option value="יב1">יב1</option>
+                    <option value="יב2">יב2</option>
+                    <option value="יב3">יב3</option>
+                    <option value="יב4">יב4</option>
+                    <option value="יב5">יב5</option>
+                    <option value="יב6">יב6</option>
+                    <option value="יב7">יב7</option>
+                    <option value="יב8">יב8</option>
+                </select><br><br>
+
+                <button type="button" onclick="submitForm()">אשר</button>
+            </form>
         </div>
 
         <!-- Confirmation Section -->
-        <div class="confirmation">
-            <img src="green-tick.png" alt="אושר">
-            <p>אושר על ידי: מנהל מערכת</p>
+        <div class="confirmation-container" id="confirmationContainer">
+            <div class="confirmation-text">
+                <p>תאריך: <span id="dateDisplay"></span></p>
+                <p>שעה: <span id="startTimeDisplay"></span> - <span id="endTimeDisplay"></span></p>
+                <p>שם התלמיד: <span id="studentNameDisplay"></span> | סיבה: ביטול שיעור | כיתה: <span id="classDisplay"></span></p>
+                <p>מחזוריות: חד פעמית | סטטוס: אושר</p>
+            </div>
+            <div class="confirmation-tick">
+                <img src="green-tick.png" alt="אושר">
+                <p>אושר על ידי: מנהל מערכת</p>
+            </div>
         </div>
 
     </div>
 </div>
 
 <script>
+    // Automatically get today's date in the format DD/MM/YYYY
     const today = new Date();
     const formattedDate = today.toLocaleDateString('he-IL');
     document.getElementById("dateDisplay").textContent = formattedDate;
 
+    // Populate the start and end time dropdowns
+    const startTimeSelect = document.getElementById("startTime");
+    const endTimeSelect = document.getElementById("endTime");
+
+    // Populate options for start time (08:00 to 16:00)
+    for (let i = 8; i <= 16; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i.toString().padStart(2, '0') + ":00";
+        startTimeSelect.appendChild(option);
+    }
+
+    // Function to populate end hour options based on start hour
     function populateEndTimes(startHour) {
-        const endTimeSelect = document.getElementById("endTime");
-        endTimeSelect.innerHTML = '';
+        endTimeSelect.innerHTML = ''; // Clear previous options
         for (let i = parseInt(startHour) + 1; i <= 17; i++) {
             const option = document.createElement("option");
             option.value = i;
             option.textContent = i.toString().padStart(2, '0') + ":00";
             endTimeSelect.appendChild(option);
         }
+    }
+
+    // Event listener for start time change
+    startTimeSelect.addEventListener("change", function() {
+        populateEndTimes(this.value);
+    });
+
+    // Initialize end times with the default start time
+    populateEndTimes(8);
+
+    // Function to handle form submission
+    function submitForm() {
+        // Get values from the form
+        const studentName = document.getElementById("studentName").value;
+        const startTime = document.getElementById("startTime").value;
+        const endTime = document.getElementById("endTime").value;
+        const classSelected = document.getElementById("class").value;
+
+        // Populate confirmation section
+        document.getElementById("studentNameDisplay").textContent = studentName;
+        document.getElementById("startTimeDisplay").textContent = startTime.padStart(2, '0') + ":00";
+        document.getElementById("endTimeDisplay").textContent = endTime.padStart(2, '0') + ":00";
+        document.getElementById("classDisplay").textContent = classSelected;
+
+        // Show the confirmation section and hide the form
+        document.getElementById("formContainer").classList.remove("active");
+        document.getElementById("confirmationContainer").classList.add("active");
     }
 </script>
 
